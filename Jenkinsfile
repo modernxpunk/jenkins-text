@@ -16,12 +16,7 @@ pipeline {
             }
         }
         stage("Test") {
-            agent {
-                docker {
-                    image 'alpine'
-                    args '-=\"root\"'
-                }
-            }
+            agent any
             steps {
                 sh "apk add --update python3 py-pip"
                 sh "pip install xmlrunner"
