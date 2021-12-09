@@ -18,7 +18,7 @@ pipeline {
         stage("Test") {
             agent any
             steps {
-                sh "apt-get -y install python3-pip"
+                sh "sudo apt-get -y install python3-pip"
                 sh "pip3 install xmlrunner"
                 sh "python3 main.py"
             }
