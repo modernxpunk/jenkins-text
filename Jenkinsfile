@@ -16,7 +16,12 @@ pipeline {
             }
         }
         stage("Test") {
-            agent any
+            agent {
+                docker {
+                    image: 'alpine'
+                    args: '-=\"root\"'
+                }
+            }
             steps {
                 sh "apt-get install python3 python3-pip"
                 sh "pip3 install xmlrunner"
@@ -24,7 +29,7 @@ pipeline {
             }
             post {
                 always {
-                    junit allowEmptyResults: true,
+                    junit allowEmptyResults: true
                     testResults: '**/test-results/*.xml'
                 }
                 success {
