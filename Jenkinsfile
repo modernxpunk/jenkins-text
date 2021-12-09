@@ -18,7 +18,7 @@ pipeline {
         stage("Test") {
             agent any
             steps {
-                sh "pip install xmlrunner"
+                sh "pip3 install xmlrunner"
                 sh "python3 main.py"
             }
             post {
