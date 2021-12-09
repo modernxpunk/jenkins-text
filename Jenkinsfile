@@ -18,8 +18,8 @@ pipeline {
         stage("Test") {
             agent any
             steps {
-                sh "apk add --no-cache python3 py3-pip"
-                sh "pip install xmlrunner"
+                sh "apt-get -y install python3-pip"
+                sh "pip3 install xmlrunner"
                 sh "python3 main.py"
             }
             post {
