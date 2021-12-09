@@ -25,7 +25,7 @@ pipeline {
             post {
                 always {
                     junit allowEmptyResults: true,
-                    testResults: '**/test-results/*.xml',
+                    testResults: '**/test-results/*.xml'
                 }
                 success {
                     echo "testing completed"
