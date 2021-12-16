@@ -1,7 +1,13 @@
 pipeline {
     options {timestamps()}
     
-    agent none
+    agent {
+        docker {
+            image: 'alpine'
+            args: '-=\"root\"'
+        }
+    }
+    
     stages {
         stage("Check scm") {
             agent any
@@ -16,12 +22,6 @@ pipeline {
             }
         }
         stage("Test") {
-            agent {
-                docker {
-                    image: 'alpine'
-                    args: '-=\"root\"'
-                }
-            }
             steps {
                 sh "apt-get install python3 python3-pip"
                 sh "pip3 install xmlrunner"
