@@ -24,9 +24,6 @@
 
 pipeline {
   agent any
-  tools {
-    'org.jenkinsci.plugins.docker.commons.tools.DockerTool' '18.09'
-  }
   environment {
     DOCKER_CERT_PATH = credentials('/var/jenkins_home/secrets/initialAdminPassword')
   }
