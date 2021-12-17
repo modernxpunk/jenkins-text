@@ -4,13 +4,19 @@ pipeline {
     agent none
 
     stages {
-        stage("Check scm") {
+        stage("checkout scm") {
             agent any
             steps {
                 checkout scm
             }
         }
-        stage('build') {
+        state('build') {
+            steps {
+                echo "building..."
+                echo "building completed"
+            }
+        }
+        stage('test') {
             agent {
                 docker {
                     image 'alpine'
@@ -18,7 +24,11 @@ pipeline {
                 }
             }
             steps {
-                sh 'python main.py'
+                sh '''
+                    apk add --update python3 py-pip
+                    pip install xmlrunner
+                    python3 tests.py
+                '''
             }
             post {
                 success {
