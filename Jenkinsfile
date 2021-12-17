@@ -10,7 +10,7 @@ pipeline {
                 checkout scm
             }
         }
-        state('build') {
+        stage('build') {
             steps {
                 echo "building..."
                 echo "building completed"
