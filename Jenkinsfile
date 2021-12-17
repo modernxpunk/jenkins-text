@@ -1,7 +1,7 @@
 pipeline {
     options {timestamps()}
     
-    agent any
+    agent none
 
     stages {
         stage("Check scm") {
@@ -11,8 +11,22 @@ pipeline {
             }
         }
         stage('build') {
+            agent {
+                docker {
+                    image 'alpine'
+                    args '-u=\"root\"'
+                }
+            }
             steps {
-                sh 'docker version'
+                sh 'python main.py'
+            }
+            post {
+                success {
+                    echo "finally..."
+                }
+                failure {
+                    echo "what? ?!?!? !?"
+                }
             }
         }
     }
