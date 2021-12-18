@@ -1,7 +1,12 @@
 pipeline {
     options {timestamps()}
     
-    agent none
+    agent {
+        docker {
+            image 'alpine'
+            args '-u=\"root\"'
+        }
+    }
 
     stages {
         stage("checkout scm") {
@@ -17,12 +22,6 @@ pipeline {
             }
         }
         stage('test') {
-            agent {
-                docker {
-                    image 'alpine'
-                    args '-u=\"root\"'
-                }
-            }
             steps {
                 sh '''
                     apk add --update python3 py-pip
